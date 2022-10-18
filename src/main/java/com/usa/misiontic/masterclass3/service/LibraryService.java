@@ -1,45 +1,47 @@
 package com.usa.misiontic.masterclass3.service;
 
-import com.usa.misiontic.masterclass3.entities.Category;
-import com.usa.misiontic.masterclass3.repository.CategoryRepository;
+
+import com.usa.misiontic.masterclass3.entities.Library;
+import com.usa.misiontic.masterclass3.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
 @Service
-public class CategoryService {
+public class LibraryService {
 
     @Autowired
-    private CategoryRepository categoryRepository;
-    public List<Category> getAll() {
-        return categoryRepository.getAll();
+    private LibraryRepository libraryRepository;
+    public List<Library> getAll() {
+        return libraryRepository.getAll();
     }
-    public Optional<Category> getCategory(int id) {
-        return categoryRepository.getCategory(id);
+    public Optional<Library> getCategory(int id) {
+        return libraryRepository.getCategory(id);
     }
-    public Category save(Category p) {
+    public Library save(Library p) {
         if (p.getId() == null) {
-            return categoryRepository.save(p);
+            return libraryRepository.save(p);
         } else {
-            Optional<Category> e = categoryRepository.getCategory(p.getId());
+            Optional<Library> e = libraryRepository.getCategory(p.getId());
             if (e.isPresent()) {
                 return p;
             } else {
-                return categoryRepository.save(p);
+                return libraryRepository.save(p);
             }
         }
     }
 
-    public Category update(Category p) {
+    public Library update(Library p) {
         if (p.getId() != null) {
-            Optional<Category> q = categoryRepository.getCategory(p.getId());
+            Optional<Library> q = libraryRepository.getCategory(p.getId());
             if (q.isPresent()) {
                 if (p.getName() != null) {
                     q.get().setName(p.getName());
                 }
 
-                categoryRepository.save(q.get());
+                libraryRepository.save(q.get());
                 return q.get();
             } else {
                 return p;
@@ -50,9 +52,9 @@ public class CategoryService {
     }
     public boolean delete(int id){
         boolean flag=false;
-        Optional<Category>p= categoryRepository.getCategory(id);
+        Optional<Library>p= libraryRepository.getCategory(id);
         if(p.isPresent()){
-            categoryRepository.delete(p.get());
+            libraryRepository.delete(p.get());
             flag=true;
         }
         return flag;

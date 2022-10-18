@@ -1,15 +1,14 @@
 package com.usa.misiontic.masterclass3.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.data.repository.cdi.Eager;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "category")
-public class Category implements Serializable {
+@Table(name = "reservas")
+public class Reservas implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +16,11 @@ public class Category implements Serializable {
     private String name;
     private String description;
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "category")
-    @JsonIgnoreProperties("category")
-    private List<Library> libs;
+
+
+    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "Id")
+    @JsonIgnoreProperties("Id")
+    private List<Reservas> libs;
 
     public Integer getId() {
         return id;
@@ -45,11 +46,11 @@ public class Category implements Serializable {
         this.description = description;
     }
 
-    public List<Library> getLibs() {
+    public List<Reservas> getLibs() {
         return libs;
     }
 
-    public void setLibs(List<Library> libs) {
+    public void setLibs(List<Reservas> libs) {
         this.libs = libs;
     }
 }
