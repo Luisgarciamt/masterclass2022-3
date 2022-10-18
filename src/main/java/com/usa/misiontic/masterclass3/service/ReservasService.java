@@ -36,9 +36,7 @@ public class ReservasService {
         if (p.getId() != null) {
             Optional<Reservas> q = reservasRepository.getReservas(p.getId());
             if (q.isPresent()) {
-                if (p.getName() != null) {
-                    q.get().setName(p.getName());
-                }
+
 
                 reservasRepository.save(q.get());
                 return q.get();

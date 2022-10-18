@@ -13,6 +13,7 @@ public class Product implements Serializable{
     private Integer id;
     private String name;
     private Integer year;
+    private String category_id;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -13,14 +14,17 @@ public class Reservas implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String description;
+    private String palco;
+    private String cliente;
+    private Date fechainicio;
+    private Date fechafin;
 
 
 
-    @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "Id")
-    @JsonIgnoreProperties("Id")
-    private List<Reservas> libs;
+    @ManyToOne
+    @JoinColumn(name = "categoryid")
+    @JsonIgnoreProperties("Reservas")
+    private Category category;
 
     public Integer getId() {
         return id;
@@ -30,27 +34,43 @@ public class Reservas implements Serializable {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getPalco() {
+        return palco;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setPalco(String palco) {
+        this.palco = palco;
     }
 
-    public String getDescription() {
-        return description;
+    public String getCliente() {
+        return cliente;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setCliente(String cliente) {
+        this.cliente = cliente;
     }
 
-    public List<Reservas> getLibs() {
-        return libs;
+    public Date getFechainicio() {
+        return fechainicio;
     }
 
-    public void setLibs(List<Reservas> libs) {
-        this.libs = libs;
+    public void setFechainicio(Date fechainicio) {
+        this.fechainicio = fechainicio;
+    }
+
+    public Date getFechafin() {
+        return fechafin;
+    }
+
+    public void setFechafin(Date fechafin) {
+        this.fechafin = fechafin;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 }
